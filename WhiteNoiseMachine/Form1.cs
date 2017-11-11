@@ -20,6 +20,7 @@ namespace WhiteNoiseMachine
 			StartMachine();
 		}
 
+		// todo: we may want to rename this to "mainTimer"
 		private void timeDisplayInterval_Tick(object sender, EventArgs e)
 		{
 			UpdateTimeDisplays();
@@ -34,6 +35,25 @@ namespace WhiteNoiseMachine
 		private void UpdateTimeDisplays()
 		{
 			timeLabel.Text = whiteNoiseMachine.GetCurrentTimeText();
+		}
+
+		private void fadeInTextField_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				TextBox textBox = sender as TextBox;
+				string input = textBox.Text;
+
+				try
+				{
+					DateTime dateTime = whiteNoiseMachine.GetDateTimeFromInput(input);
+					Console.WriteLine(dateTime);
+				}
+				catch (Exception exception)
+				{
+					MessageBox.Show(exception.Message, "Error occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+			}
 		}
 	}
 }

@@ -37,7 +37,6 @@
 			this.label6 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.fadeInTextField = new System.Windows.Forms.TextBox();
-			this.errorLabel = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// timeLabel
@@ -117,31 +116,19 @@
 			this.fadeInTextField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.fadeInTextField.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.fadeInTextField.Location = new System.Drawing.Point(111, 276);
-			this.fadeInTextField.MaxLength = 7;
+			this.fadeInTextField.MaxLength = 8;
 			this.fadeInTextField.Name = "fadeInTextField";
 			this.fadeInTextField.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.fadeInTextField.Size = new System.Drawing.Size(121, 39);
 			this.fadeInTextField.TabIndex = 8;
 			this.fadeInTextField.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			// 
-			// errorLabel
-			// 
-			this.errorLabel.AutoSize = true;
-			this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.errorLabel.ForeColor = System.Drawing.Color.Red;
-			this.errorLabel.Location = new System.Drawing.Point(180, 426);
-			this.errorLabel.Name = "errorLabel";
-			this.errorLabel.Size = new System.Drawing.Size(170, 17);
-			this.errorLabel.TabIndex = 9;
-			this.errorLabel.Text = "This is example error text.";
-			this.errorLabel.Visible = false;
+			this.fadeInTextField.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fadeInTextField_KeyDown);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(544, 561);
-			this.Controls.Add(this.errorLabel);
 			this.Controls.Add(this.fadeInTextField);
 			this.Controls.Add(this.label6);
 			this.Controls.Add(this.label7);
@@ -169,7 +156,6 @@
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.TextBox fadeInTextField;
-		private System.Windows.Forms.Label errorLabel;
 	}
 }
 
