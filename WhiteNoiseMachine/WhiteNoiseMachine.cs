@@ -18,7 +18,6 @@ namespace WhiteNoiseMachine
 			return GetCurrentTimeText();
 		}
 
-		// this is a test change
 		public string GetFadeOutTimeText()
 		{
 			return GetCurrentTimeText();
