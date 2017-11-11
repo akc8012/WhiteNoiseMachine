@@ -37,6 +37,7 @@
 			this.label6 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.fadeInTextField = new System.Windows.Forms.TextBox();
+			this.fadeInTextLabel = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// timeLabel
@@ -114,6 +115,7 @@
 			// fadeInTextField
 			// 
 			this.fadeInTextField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.fadeInTextField.Enabled = false;
 			this.fadeInTextField.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.fadeInTextField.Location = new System.Drawing.Point(111, 276);
 			this.fadeInTextField.MaxLength = 8;
@@ -121,14 +123,29 @@
 			this.fadeInTextField.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.fadeInTextField.Size = new System.Drawing.Size(121, 39);
 			this.fadeInTextField.TabIndex = 8;
+			this.fadeInTextField.Text = "4:00 AM";
 			this.fadeInTextField.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.fadeInTextField.Visible = false;
 			this.fadeInTextField.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fadeInTextField_KeyDown);
+			// 
+			// fadeInTextLabel
+			// 
+			this.fadeInTextLabel.AutoSize = true;
+			this.fadeInTextLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.fadeInTextLabel.Location = new System.Drawing.Point(112, 331);
+			this.fadeInTextLabel.Name = "fadeInTextLabel";
+			this.fadeInTextLabel.Size = new System.Drawing.Size(120, 32);
+			this.fadeInTextLabel.TabIndex = 9;
+			this.fadeInTextLabel.Text = "4:00 AM";
+			this.fadeInTextLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.fadeInTextLabel.Click += new System.EventHandler(this.fadeInTextLabel_Click);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(544, 561);
+			this.Controls.Add(this.fadeInTextLabel);
 			this.Controls.Add(this.fadeInTextField);
 			this.Controls.Add(this.label6);
 			this.Controls.Add(this.label7);
@@ -156,6 +173,7 @@
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.TextBox fadeInTextField;
+		private System.Windows.Forms.Label fadeInTextLabel;
 	}
 }
 

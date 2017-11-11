@@ -26,7 +26,7 @@ namespace WhiteNoiseMachine
 
 		bool IsTimeText(string timeText)
 		{
-			return Regex.Match(timeText, "\\d\\d{0,1}[:. ]\\d{2}\\s?[ap]m").Value == timeText;
+			return Regex.Match(timeText, "\\d\\d{0,1}[:. ]\\d{2}\\s?[ap]m", RegexOptions.IgnoreCase).Value == timeText;
 		}
 
 		int ConvertHourTo24(int hour, bool isPM)
@@ -47,12 +47,12 @@ namespace WhiteNoiseMachine
 		{
 			string errorMessage = "Please enter a valid time. Your input should look something like this: " + GetCurrentTimeText();
 
-			if (!IsTimeText(input))
+			if (string.IsNullOrWhiteSpace(input) || !IsTimeText(input))
 				throw new Exception(errorMessage);
 
 			int hour = Convert.ToInt32(Regex.Match(input, "\\d\\d{0,1}(?=[:. ]\\d)").Value);
 			int minute = Convert.ToInt32(Regex.Match(input, "(?<=\\d[:. ])\\d{2}").Value);
-			bool isPM = Regex.Match(input, "[ap]m").Value.ToLower() == "pm";
+			bool isPM = Regex.Match(input, "[ap]m", RegexOptions.IgnoreCase).Value.ToLower() == "pm";
 
 			if (hour > 12 || minute > 59)
 				throw new Exception(errorMessage);
