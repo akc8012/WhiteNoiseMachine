@@ -18,16 +18,23 @@ namespace WhiteNoiseMachine
 		{
 			InitializeComponent();
 			StartMachine();
+
+			fadeInTextLabel.Location = fadeInTextField.Location;
 		}
 
 		private void StartMachine()
 		{
-			whiteNoiseMachine = new WhiteNoiseMachine();
-			whiteNoiseMachine.SetFadeInTimeFromInput(fadeInTextLabel.Text);
+			try
+			{
+				whiteNoiseMachine = new WhiteNoiseMachine();
 
-			UpdateTimeDisplays();
-
-			fadeInTextLabel.Location = fadeInTextField.Location;
+				whiteNoiseMachine.SetFadeInTimeFromInput(fadeInTextLabel.Text);
+				UpdateTimeDisplays();
+			}
+			catch (Exception exception)
+			{
+				MessageBox.Show(exception.Message, "Error occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void mainTimer_Tick(object sender, EventArgs e)

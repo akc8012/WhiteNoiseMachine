@@ -33,7 +33,11 @@ namespace WhiteNoiseMachine
 		public string GetNoiseStartTimeText()
 		{
 			TimeSpan timeSpan = fadeInTime.Subtract(DateTime.Now);
-			return Math.Round(timeSpan.TotalHours, 2).ToString() + " hours";
+			double startTime = Math.Round(timeSpan.TotalHours, 2);
+			if (startTime < 0)
+				startTime = 0;
+
+			return startTime.ToString() + " hours";
 		}
 
 		public string GetFadeInVolumeText()
