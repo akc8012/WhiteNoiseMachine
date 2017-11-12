@@ -29,6 +29,8 @@ namespace WhiteNoiseMachine
 		private void StartMachine()
 		{
 			whiteNoiseMachine = new WhiteNoiseMachine();
+			whiteNoiseMachine.SetFadeInTimeFromInput(fadeInTextLabel.Text);
+
 			UpdateTimeDisplays();
 
 			fadeInTextLabel.Location = fadeInTextField.Location;
@@ -37,9 +39,20 @@ namespace WhiteNoiseMachine
 		private void UpdateTimeDisplays()
 		{
 			timeLabel.Text = whiteNoiseMachine.GetCurrentTimeText();
+			noiseStartTimeLabel.Text = whiteNoiseMachine.GetNoiseStartTimeText();
 		}
 
 		// todo: separate between events and helper methods
+
+		private void fadeInTextLabel_Click(object sender, EventArgs e)
+		{
+			fadeInTextLabel.Visible = false;
+
+			fadeInTextField.Text = fadeInTextLabel.Text;
+			fadeInTextField.Visible = true;
+			fadeInTextField.Enabled = true;
+			fadeInTextField.Focus();
+		}
 
 		private void fadeInTextField_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -47,29 +60,22 @@ namespace WhiteNoiseMachine
 			{
 				try
 				{
-					DateTime dateTime = whiteNoiseMachine.GetDateTimeFromInput(fadeInTextField.Text);
-					Console.WriteLine(dateTime);
+					whiteNoiseMachine.SetFadeInTimeFromInput(fadeInTextField.Text);
+					Console.WriteLine(whiteNoiseMachine.GetFadeInTime);
 
-					fadeInTextLabel.Text = dateTime.ToShortTimeString();
+					fadeInTextLabel.Text = whiteNoiseMachine.GetFadeInTime.ToShortTimeString();
 
 					fadeInTextField.Visible = false;
 					fadeInTextField.Enabled = false;
 					fadeInTextLabel.Visible = true;
+
+					UpdateTimeDisplays();
 				}
 				catch (Exception exception)
 				{
 					MessageBox.Show(exception.Message, "Error occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
-		}
-
-		private void fadeInTextLabel_Click(object sender, EventArgs e)
-		{
-			fadeInTextLabel.Visible = false;
-
-			fadeInTextField.Visible = true;
-			fadeInTextField.Enabled = true;
-			fadeInTextField.Focus();
 		}
 	}
 }

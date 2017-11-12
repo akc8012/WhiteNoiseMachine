@@ -35,7 +35,7 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
-			this.label7 = new System.Windows.Forms.Label();
+			this.noiseStartTimeLabel = new System.Windows.Forms.Label();
 			this.fadeInTextField = new System.Windows.Forms.TextBox();
 			this.fadeInTextLabel = new System.Windows.Forms.Label();
 			this.SuspendLayout();
@@ -94,23 +94,23 @@
 			// 
 			this.label6.AutoSize = true;
 			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label6.Location = new System.Drawing.Point(333, 92);
+			this.label6.Location = new System.Drawing.Point(300, 92);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(109, 20);
 			this.label6.TabIndex = 7;
 			this.label6.Text = "Noise starts in";
 			this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
-			// label7
+			// noiseStartTimeLabel
 			// 
-			this.label7.AutoSize = true;
-			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label7.Location = new System.Drawing.Point(326, 122);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(116, 32);
-			this.label7.TabIndex = 6;
-			this.label7.Text = "0 hours";
-			this.label7.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.noiseStartTimeLabel.AutoSize = true;
+			this.noiseStartTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.noiseStartTimeLabel.Location = new System.Drawing.Point(298, 122);
+			this.noiseStartTimeLabel.Name = "noiseStartTimeLabel";
+			this.noiseStartTimeLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+			this.noiseStartTimeLabel.Size = new System.Drawing.Size(116, 32);
+			this.noiseStartTimeLabel.TabIndex = 6;
+			this.noiseStartTimeLabel.Text = "0 hours";
 			// 
 			// fadeInTextField
 			// 
@@ -123,7 +123,6 @@
 			this.fadeInTextField.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.fadeInTextField.Size = new System.Drawing.Size(121, 39);
 			this.fadeInTextField.TabIndex = 8;
-			this.fadeInTextField.Text = "4:00 AM";
 			this.fadeInTextField.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.fadeInTextField.Visible = false;
 			this.fadeInTextField.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fadeInTextField_KeyDown);
@@ -148,7 +147,7 @@
 			this.Controls.Add(this.fadeInTextLabel);
 			this.Controls.Add(this.fadeInTextField);
 			this.Controls.Add(this.label6);
-			this.Controls.Add(this.label7);
+			this.Controls.Add(this.noiseStartTimeLabel);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
@@ -171,7 +170,7 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Label noiseStartTimeLabel;
 		private System.Windows.Forms.TextBox fadeInTextField;
 		private System.Windows.Forms.Label fadeInTextLabel;
 	}

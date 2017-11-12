@@ -9,9 +9,18 @@ namespace WhiteNoiseMachine
 {
 	class WhiteNoiseMachine
 	{
+		private DateTime fadeInTime;
+		public DateTime GetFadeInTime { get { return fadeInTime; } }
+
 		public string GetCurrentTimeText()
 		{
 			return DateTime.Now.ToShortTimeString();
+		}
+
+		public string GetNoiseStartTimeText()
+		{
+			TimeSpan timeSpan = fadeInTime.Subtract(DateTime.Now);
+			return Math.Round(timeSpan.TotalHours, 2).ToString() + " hours";
 		}
 
 		public string GetFadeInTimeText()
@@ -43,7 +52,7 @@ namespace WhiteNoiseMachine
 			return hour;
 		}
 
-		public DateTime GetDateTimeFromInput(string input)
+		private DateTime GetDateTimeFromInput(string input)
 		{
 			string errorMessage = "Please enter a valid time. Your input should look something like this: " + GetCurrentTimeText();
 
@@ -58,7 +67,12 @@ namespace WhiteNoiseMachine
 				throw new Exception(errorMessage);
 
 			DateTime now = DateTime.Now;
-			return new DateTime(now.Year, now.Month, now.Day, ConvertHourTo24(hour, isPM), minute, 00);
+			return new DateTime(now.Year, now.Month, now.AddDays(1).Day, ConvertHourTo24(hour, isPM), minute, 00);
+		}
+
+		public void SetFadeInTimeFromInput(string input)
+		{
+			fadeInTime = GetDateTimeFromInput(input);
 		}
 	}
 }
