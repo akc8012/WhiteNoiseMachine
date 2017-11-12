@@ -64,8 +64,6 @@ namespace WhiteNoiseMachine
 			fadeInTextField.Visible = true;
 			fadeInTextField.Enabled = true;
 			fadeInTextField.Focus();
-
-			whiteNoiseMachine.StartNoise();		// used for testing fade in start
 		}
 
 		private void fadeInTextField_KeyDown(object sender, KeyEventArgs e)

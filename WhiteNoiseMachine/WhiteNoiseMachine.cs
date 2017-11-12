@@ -79,12 +79,15 @@ namespace WhiteNoiseMachine
 				throw new Exception(errorMessage);
 
 			DateTime now = DateTime.Now;
-			return new DateTime(now.Year, now.Month, now.AddDays(1).Day, ConvertHourTo24(hour, isPM), minute, 00);
+			return new DateTime(now.Year, now.Month, now.Day, ConvertHourTo24(hour, isPM), minute, 00);
 		}
 
 		public void SetFadeInTimeFromInput(string input)
 		{
 			fadeInTime = GetDateTimeFromInput(input);
+
+			if (DateTime.Now.Subtract(fadeInTime).TotalHours > 0)
+				fadeInTime = fadeInTime.AddDays(1);
 		}
 
 		public void StartNoise()
@@ -121,7 +124,6 @@ namespace WhiteNoiseMachine
 		private void CheckForWhiteNoiseStartTime()
 		{
 			DateTime now = DateTime.Now;
-			//now = now.AddDays(1);   // ONLY USED FOR TESTING ON SAME DAY
 
 			if (now.CompareTo(fadeInTime) == 1)
 				StartNoise();
