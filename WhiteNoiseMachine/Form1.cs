@@ -77,5 +77,10 @@ namespace WhiteNoiseMachine
 				}
 			}
 		}
+
+		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			AudioPlayer.StopWhiteNoise();
+		}
 	}
 }

@@ -73,6 +73,9 @@ namespace WhiteNoiseMachine
 		public void SetFadeInTimeFromInput(string input)
 		{
 			fadeInTime = GetDateTimeFromInput(input);
+
+			AudioPlayer.SetWhiteNoiseSound(@"D:\Documents\catRun.wav");
+			AudioPlayer.PlayWhiteNoise();
 		}
 	}
 }
