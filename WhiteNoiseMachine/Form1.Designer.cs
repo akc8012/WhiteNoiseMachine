@@ -155,9 +155,10 @@
 			// stopNoiseButton
 			// 
 			this.stopNoiseButton.Enabled = false;
-			this.stopNoiseButton.Location = new System.Drawing.Point(228, 446);
+			this.stopNoiseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.stopNoiseButton.Location = new System.Drawing.Point(184, 420);
 			this.stopNoiseButton.Name = "stopNoiseButton";
-			this.stopNoiseButton.Size = new System.Drawing.Size(97, 23);
+			this.stopNoiseButton.Size = new System.Drawing.Size(170, 90);
 			this.stopNoiseButton.TabIndex = 11;
 			this.stopNoiseButton.Text = "Stop white noise";
 			this.stopNoiseButton.UseVisualStyleBackColor = true;

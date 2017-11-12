@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WhiteNoiseMachine
 {
@@ -17,10 +18,11 @@ namespace WhiteNoiseMachine
 		public float GetVolume { get { return noiseVolume; } }
 		private enum WhiteNoisePlayingState { NotPlaying, Playing };
 		WhiteNoisePlayingState playingState = WhiteNoisePlayingState.NotPlaying;
+		private const float VolumeIncreaseInterval = 0.0002778f;	// 1 / 3600 (seconds in an hour)
 
 		public WhiteNoiseMachine()
 		{
-			audioPlayer = new AudioPlayer(@"D:\Documents\catRun.wav");
+			audioPlayer = new AudioPlayer(Application.StartupPath + @"\whiteNoise.mp3");
 		}
 
 		public string GetCurrentTimeText()
@@ -123,7 +125,7 @@ namespace WhiteNoiseMachine
 
 		private void UpdateWhiteNoiseFadeIn()
 		{
-			noiseVolume += 0.1f;
+			noiseVolume += VolumeIncreaseInterval;
 			if (noiseVolume > 1.0f)
 				noiseVolume = 1.0f;
 
