@@ -12,11 +12,20 @@ namespace WhiteNoiseMachine
 {
 	class AudioPlayer
 	{
-		private static IWaveSource whiteNoiseSound;
-		private static ISoundOut soundOut;
-		private static readonly string SoundNotLoadedMessage = "White noise sound is not loaded.";
+		private IWaveSource whiteNoiseSound;
+		private ISoundOut soundOut;
+		private readonly string SoundNotLoadedMessage = "White noise sound is not loaded.";
 
-		public static void PlayWhiteNoise()
+		public AudioPlayer(string filename)
+		{
+			whiteNoiseSound = CodecFactory.Instance.GetCodec(filename);
+			whiteNoiseSound = whiteNoiseSound.Loop();
+
+			soundOut = GetSoundOut();
+			soundOut.Initialize(whiteNoiseSound);
+		}
+
+		public void PlayWhiteNoise()
 		{
 			if (soundOut == null)
 				throw new Exception(SoundNotLoadedMessage);
@@ -24,13 +33,13 @@ namespace WhiteNoiseMachine
 			soundOut.Play();
 		}
 
-		public static void StopWhiteNoise()
+		public void StopWhiteNoise()
 		{
 			if (soundOut != null)
 				soundOut.Stop();
 		}
 
-		public static void SetWhiteNoiseVolume(float volume)
+		public void SetWhiteNoiseVolume(float volume)
 		{
 			if (soundOut == null)
 				throw new Exception(SoundNotLoadedMessage);
@@ -38,27 +47,7 @@ namespace WhiteNoiseMachine
 			soundOut.Volume = volume;
 		}
 
-		public static float GetWhiteNoiseVolume()
-		{
-			if (soundOut == null)
-				return 0.0f;
-
-			return soundOut.Volume;
-		}
-
-		public static void SetWhiteNoiseSound(string filename)
-		{
-			whiteNoiseSound = CodecFactory.Instance.GetCodec(filename);
-			if (whiteNoiseSound == null)
-				throw new Exception(string.Format("Could not load sound at path {0}. Please correct your file path.", filename));
-
-			whiteNoiseSound = whiteNoiseSound.Loop();
-
-			soundOut = GetSoundOut();
-			soundOut.Initialize(whiteNoiseSound);
-		}
-
-		public static bool WhiteNoisePlaying()
+		public bool WhiteNoisePlaying()
 		{
 			if (soundOut == null)
 				return false;
@@ -66,7 +55,7 @@ namespace WhiteNoiseMachine
 			return soundOut.PlaybackState == PlaybackState.Playing;
 		}
 
-		private static ISoundOut GetSoundOut()
+		private ISoundOut GetSoundOut()
 		{
 			if (WasapiOut.IsSupportedOnCurrentPlatform)
 				return new WasapiOut();

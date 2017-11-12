@@ -35,7 +35,7 @@ namespace WhiteNoiseMachine
 			UpdateTimeDisplays();
 			whiteNoiseMachine.UpdateWhiteNoise();
 
-			if (AudioPlayer.GetWhiteNoiseVolume() > 0.0f)
+			if (whiteNoiseMachine.GetVolume > 0.0f)
 				stopNoiseButton.Enabled = true;
 		}
 
@@ -44,7 +44,7 @@ namespace WhiteNoiseMachine
 			timeLabel.Text = whiteNoiseMachine.GetCurrentTimeText();
 			noiseStartTimeLabel.Text = whiteNoiseMachine.GetNoiseStartTimeText();
 
-			fadeInVolumeLabel.Text = string.Format("fade-in volume is at {0}%", Math.Round((AudioPlayer.GetWhiteNoiseVolume() * 100)).ToString());
+			fadeInVolumeLabel.Text = whiteNoiseMachine.GetFadeInVolumeText();
 		}
 
 		// todo: separate between events and helper methods
@@ -89,7 +89,7 @@ namespace WhiteNoiseMachine
 		{
 			try
 			{
-				AudioPlayer.StopWhiteNoise();
+				whiteNoiseMachine.StopNoise();
 			}
 			catch (Exception exception)
 			{

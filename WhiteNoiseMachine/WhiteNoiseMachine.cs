@@ -9,11 +9,19 @@ namespace WhiteNoiseMachine
 {
 	class WhiteNoiseMachine
 	{
+		private AudioPlayer audioPlayer;
+
 		private DateTime fadeInTime;
 		public DateTime GetFadeInTime { get { return fadeInTime; } }
 		private float noiseVolume = 0;
+		public float GetVolume { get { return noiseVolume; } }
 		private enum WhiteNoisePlayingState { NotPlaying, Playing };
 		WhiteNoisePlayingState playingState = WhiteNoisePlayingState.NotPlaying;
+
+		public WhiteNoiseMachine()
+		{
+			audioPlayer = new AudioPlayer(@"D:\Documents\catRun.wav");
+		}
 
 		public string GetCurrentTimeText()
 		{
@@ -26,14 +34,9 @@ namespace WhiteNoiseMachine
 			return Math.Round(timeSpan.TotalHours, 2).ToString() + " hours";
 		}
 
-		public string GetFadeInTimeText()
+		public string GetFadeInVolumeText()
 		{
-			return GetCurrentTimeText();
-		}
-
-		public string GetFadeOutTimeText()
-		{
-			return GetCurrentTimeText();
+			return string.Format("fade-in volume is at {0}%", Math.Round((noiseVolume * 100)).ToString());
 		}
 
 		bool IsTimeText(string timeText)
@@ -82,9 +85,8 @@ namespace WhiteNoiseMachine
 		{
 			playingState = WhiteNoisePlayingState.Playing;
 
-			AudioPlayer.SetWhiteNoiseSound(@"D:\Documents\catRun.wav");
-			AudioPlayer.PlayWhiteNoise();
-			AudioPlayer.SetWhiteNoiseVolume(noiseVolume);
+			audioPlayer.PlayWhiteNoise();
+			audioPlayer.SetWhiteNoiseVolume(noiseVolume);
 		}
 
 		public void StopNoise()
@@ -92,8 +94,8 @@ namespace WhiteNoiseMachine
 			playingState = WhiteNoisePlayingState.NotPlaying;
 			noiseVolume = 0.0f;
 
-			AudioPlayer.SetWhiteNoiseVolume(noiseVolume);
-			AudioPlayer.StopWhiteNoise();
+			audioPlayer.SetWhiteNoiseVolume(noiseVolume);
+			audioPlayer.StopWhiteNoise();
 		}
 
 		public void UpdateWhiteNoise()
@@ -125,7 +127,7 @@ namespace WhiteNoiseMachine
 			if (noiseVolume > 1.0f)
 				noiseVolume = 1.0f;
 
-			AudioPlayer.SetWhiteNoiseVolume(noiseVolume);
+			audioPlayer.SetWhiteNoiseVolume(noiseVolume);
 		}
 	}
 }
