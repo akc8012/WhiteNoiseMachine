@@ -20,12 +20,6 @@ namespace WhiteNoiseMachine
 			StartMachine();
 		}
 
-		// todo: we may want to rename this to "mainTimer"
-		private void timeDisplayInterval_Tick(object sender, EventArgs e)
-		{
-			UpdateTimeDisplays();
-		}
-
 		private void StartMachine()
 		{
 			whiteNoiseMachine = new WhiteNoiseMachine();
@@ -36,10 +30,21 @@ namespace WhiteNoiseMachine
 			fadeInTextLabel.Location = fadeInTextField.Location;
 		}
 
+		private void mainTimer_Tick(object sender, EventArgs e)
+		{
+			UpdateTimeDisplays();
+			whiteNoiseMachine.UpdateWhiteNoise();
+
+			if (AudioPlayer.GetWhiteNoiseVolume() > 0.0f)
+				stopNoiseButton.Enabled = true;
+		}
+
 		private void UpdateTimeDisplays()
 		{
 			timeLabel.Text = whiteNoiseMachine.GetCurrentTimeText();
 			noiseStartTimeLabel.Text = whiteNoiseMachine.GetNoiseStartTimeText();
+
+			fadeInVolumeLabel.Text = string.Format("fade-in volume is at {0}%", Math.Round((AudioPlayer.GetWhiteNoiseVolume() * 100)).ToString());
 		}
 
 		// todo: separate between events and helper methods
@@ -52,6 +57,8 @@ namespace WhiteNoiseMachine
 			fadeInTextField.Visible = true;
 			fadeInTextField.Enabled = true;
 			fadeInTextField.Focus();
+
+			whiteNoiseMachine.StartNoise();
 		}
 
 		private void fadeInTextField_KeyDown(object sender, KeyEventArgs e)
@@ -80,7 +87,22 @@ namespace WhiteNoiseMachine
 
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			AudioPlayer.StopWhiteNoise();
+			try
+			{
+				AudioPlayer.StopWhiteNoise();
+			}
+			catch (Exception exception)
+			{
+				MessageBox.Show(exception.Message, "Error occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		private void stopNoiseButton_Click(object sender, EventArgs e)
+		{
+			whiteNoiseMachine.StopNoise();
+			stopNoiseButton.Enabled = false;
+
+			UpdateTimeDisplays();
 		}
 	}
 }

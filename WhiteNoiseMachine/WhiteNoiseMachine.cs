@@ -11,6 +11,9 @@ namespace WhiteNoiseMachine
 	{
 		private DateTime fadeInTime;
 		public DateTime GetFadeInTime { get { return fadeInTime; } }
+		private float noiseVolume = 0;
+		private enum WhiteNoisePlayingState { NotPlaying, Playing };
+		WhiteNoisePlayingState playingState = WhiteNoisePlayingState.NotPlaying;
 
 		public string GetCurrentTimeText()
 		{
@@ -63,7 +66,7 @@ namespace WhiteNoiseMachine
 			int minute = Convert.ToInt32(Regex.Match(input, "(?<=\\d[:. ])\\d{2}").Value);
 			bool isPM = Regex.Match(input, "[ap]m", RegexOptions.IgnoreCase).Value.ToLower() == "pm";
 
-			if (hour > 12 || minute > 59)
+			if (hour > 12 || hour < 1 || minute > 59)
 				throw new Exception(errorMessage);
 
 			DateTime now = DateTime.Now;
@@ -73,9 +76,56 @@ namespace WhiteNoiseMachine
 		public void SetFadeInTimeFromInput(string input)
 		{
 			fadeInTime = GetDateTimeFromInput(input);
+		}
+
+		public void StartNoise()
+		{
+			playingState = WhiteNoisePlayingState.Playing;
 
 			AudioPlayer.SetWhiteNoiseSound(@"D:\Documents\catRun.wav");
 			AudioPlayer.PlayWhiteNoise();
+			AudioPlayer.SetWhiteNoiseVolume(noiseVolume);
+		}
+
+		public void StopNoise()
+		{
+			playingState = WhiteNoisePlayingState.NotPlaying;
+			noiseVolume = 0.0f;
+
+			AudioPlayer.SetWhiteNoiseVolume(noiseVolume);
+			AudioPlayer.StopWhiteNoise();
+		}
+
+		public void UpdateWhiteNoise()
+		{
+			switch (playingState)
+			{
+				case WhiteNoisePlayingState.NotPlaying:
+					CheckForWhiteNoiseStartTime();
+				break;
+
+				case WhiteNoisePlayingState.Playing:
+					UpdateWhiteNoiseFadeIn();
+				break;
+			}
+		}
+
+		private void CheckForWhiteNoiseStartTime()
+		{
+			DateTime now = DateTime.Now;
+			//now = now.AddDays(1);   // ONLY USED FOR TESTING ON SAME DAY
+
+			if (now.CompareTo(fadeInTime) == 1)
+				StartNoise();
+		}
+
+		private void UpdateWhiteNoiseFadeIn()
+		{
+			noiseVolume += 0.1f;
+			if (noiseVolume > 1.0f)
+				noiseVolume = 1.0f;
+
+			AudioPlayer.SetWhiteNoiseVolume(noiseVolume);
 		}
 	}
 }

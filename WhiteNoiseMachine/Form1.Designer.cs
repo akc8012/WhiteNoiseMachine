@@ -30,7 +30,7 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.timeLabel = new System.Windows.Forms.Label();
-			this.timeDisplayInterval = new System.Windows.Forms.Timer(this.components);
+			this.mainTimer = new System.Windows.Forms.Timer(this.components);
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
@@ -38,6 +38,8 @@
 			this.noiseStartTimeLabel = new System.Windows.Forms.Label();
 			this.fadeInTextField = new System.Windows.Forms.TextBox();
 			this.fadeInTextLabel = new System.Windows.Forms.Label();
+			this.fadeInVolumeLabel = new System.Windows.Forms.Label();
+			this.stopNoiseButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// timeLabel
@@ -51,11 +53,11 @@
 			this.timeLabel.Text = "0:00 PM";
 			this.timeLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
-			// timeDisplayInterval
+			// mainTimer
 			// 
-			this.timeDisplayInterval.Enabled = true;
-			this.timeDisplayInterval.Interval = 1000;
-			this.timeDisplayInterval.Tick += new System.EventHandler(this.timeDisplayInterval_Tick);
+			this.mainTimer.Enabled = true;
+			this.mainTimer.Interval = 1000;
+			this.mainTimer.Tick += new System.EventHandler(this.mainTimer_Tick);
 			// 
 			// label1
 			// 
@@ -131,7 +133,7 @@
 			// 
 			this.fadeInTextLabel.AutoSize = true;
 			this.fadeInTextLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.fadeInTextLabel.Location = new System.Drawing.Point(112, 331);
+			this.fadeInTextLabel.Location = new System.Drawing.Point(112, 346);
 			this.fadeInTextLabel.Name = "fadeInTextLabel";
 			this.fadeInTextLabel.Size = new System.Drawing.Size(120, 32);
 			this.fadeInTextLabel.TabIndex = 9;
@@ -139,11 +141,35 @@
 			this.fadeInTextLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			this.fadeInTextLabel.Click += new System.EventHandler(this.fadeInTextLabel_Click);
 			// 
+			// fadeInVolumeLabel
+			// 
+			this.fadeInVolumeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.fadeInVolumeLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+			this.fadeInVolumeLabel.Location = new System.Drawing.Point(49, 318);
+			this.fadeInVolumeLabel.Name = "fadeInVolumeLabel";
+			this.fadeInVolumeLabel.Size = new System.Drawing.Size(184, 20);
+			this.fadeInVolumeLabel.TabIndex = 10;
+			this.fadeInVolumeLabel.Text = "fade-in volume is at 0% sadlfjksadlfj";
+			this.fadeInVolumeLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			// 
+			// stopNoiseButton
+			// 
+			this.stopNoiseButton.Enabled = false;
+			this.stopNoiseButton.Location = new System.Drawing.Point(228, 446);
+			this.stopNoiseButton.Name = "stopNoiseButton";
+			this.stopNoiseButton.Size = new System.Drawing.Size(97, 23);
+			this.stopNoiseButton.TabIndex = 11;
+			this.stopNoiseButton.Text = "Stop white noise";
+			this.stopNoiseButton.UseVisualStyleBackColor = true;
+			this.stopNoiseButton.Click += new System.EventHandler(this.stopNoiseButton_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(544, 561);
+			this.Controls.Add(this.stopNoiseButton);
+			this.Controls.Add(this.fadeInVolumeLabel);
 			this.Controls.Add(this.fadeInTextLabel);
 			this.Controls.Add(this.fadeInTextField);
 			this.Controls.Add(this.label6);
@@ -166,7 +192,7 @@
 		#endregion
 
 		private System.Windows.Forms.Label timeLabel;
-		private System.Windows.Forms.Timer timeDisplayInterval;
+		private System.Windows.Forms.Timer mainTimer;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label4;
@@ -174,6 +200,8 @@
 		private System.Windows.Forms.Label noiseStartTimeLabel;
 		private System.Windows.Forms.TextBox fadeInTextField;
 		private System.Windows.Forms.Label fadeInTextLabel;
+		private System.Windows.Forms.Label fadeInVolumeLabel;
+		private System.Windows.Forms.Button stopNoiseButton;
 	}
 }
 
